@@ -1,75 +1,72 @@
-## Herramienta TDAH para profesores de español
+## Objetivo
 
-Una utilidad web de una sola sesión, en español, que ayuda al profesorado a:
-1. Identificar posibles síntomas de TDAH en un estudiante mediante una lista de verificación.
-2. Recibir medidas concretas recomendadas según los síntomas marcados.
-3. Conocer un método de evaluación para cada medida aplicada.
+Reescribir los contenidos de la herramienta para que reflejen el marco teórico aportado: enfoque inclusivo bajo DUA, niveles de respuesta del Decreto 104/2018 y Orden 20/2019, evaluación por competencias (LOMLOE), y eliminación de prácticas controvertidas (economía de fichas). Añadir seguimiento socioemocional y ejecutivo, no sólo académico.
 
-Sin cuentas, sin base de datos: todo vive en el estado de la sesión actual.
+No se modifica la arquitectura ni el flujo: sólo cambian los contenidos (datos + textos visibles).
 
 ---
 
-### Estructura de la aplicación
+## Cambios por archivo
 
-Tres rutas separadas (mejor SEO y navegación clara):
+### 1. `src/data/adhd.ts` — reescritura del catálogo
 
-- `/` — Inicio: explicación de la herramienta, aviso (no sustituye diagnóstico clínico) y botón "Comenzar evaluación".
-- `/checklist` — Lista de verificación de síntomas agrupados por categoría.
-- `/resultados` — Resumen de síntomas marcados + medidas recomendadas con su método de evaluación.
-- `/acerca` — Breve página informativa sobre el propósito, fuentes orientativas y limitaciones.
+**A. Añadir un nuevo campo a `Measure`:**
+- `level: "universal" | "individualizada"` — indica si la medida es DUA de aula (niveles 1-2, beneficia a todo el grupo) o individualizada (niveles 3-4, requiere coordinación con Orientación / PAP).
+- Mantener `evaluation` pero ampliarlo para incluir, donde proceda, indicadores **académicos**, **conductuales/ejecutivos** y **socioemocionales**.
 
----
+**B. Revisar medidas existentes según teoría:**
+- `asiento-estrategico`: añadir matiz "especialmente útil en etapas previas; en Secundaria combinar con autonomía organizativa". Nivel: universal.
+- `instrucciones-segmentadas`: reforzar con cita a Hervás-Torres (2022) — instrucciones directas, breves, con apoyo visual, verificación de comprensión antes de iniciar. Nivel: universal.
+- `apoyo-visual`, `pausas-activas`, `señales-no-verbales`, `turnos-estructurados`, `objeto-manipulativo`, `tiempo-tarea`: marcar como **universal (DUA)**, recalcando que benefician a toda el aula.
+- `agenda-tareas`: enmarcarlo en "organización del entorno y del tiempo" con supervisión escuela-familia (Costa et al., 2026). Universal con seguimiento individual.
+- `rubrica-revision`: vincular a evaluación por competencias LOMLOE y a "rúbricas que separan capacidades" (Ministerio de Educación, 2020) para fomentar metacognición. Universal.
+- `refuerzo-positivo`: reescribir como **alabanza descriptiva específica**, inmediata, sin exageraciones; eliminar cualquier referencia a sistemas de puntos/canje (token economy) y añadir nota explícita: "se evita la economía de fichas por motivos éticos e inclusivos (Kohn, 2018)". Universal.
+- `autoinstrucciones`: mantener, alineado con autorregulación ejecutiva.
+- `examen-adaptado`: ajustar tiempo extra a **25-50 %** (Fundación CADAH, 2023), añadir preguntas cortas, negrita en palabras clave, espacios amplios. Nivel: individualizada (niveles 3-4 PAP).
+- `tutoria-individual` y `coordinacion-orientacion`: vincular explícitamente al PAP (Orden 20/2019, art. 9), reuniones coincidentes con sesiones de evaluación y revisión flexible más allá de la evaluación final. Individualizada.
 
-### Flujo del usuario
+**C. Nuevas medidas a añadir:**
+- `fragmentacion-tareas` — fragmentar tareas en pasos secuenciales con refuerzo tras cada paso, para mitigar memoria de trabajo ineficaz y prevenir abandono/ansiedad. Universal.
+- `verificacion-comprension` — pedir parafraseo o ejemplo antes de iniciar la actividad (Hervás-Torres, 2022). Universal. *(O integrar en `instrucciones-segmentadas` para no duplicar — preferible integrar.)*
+- `rubrica-competencial` — rúbrica por capacidades alineada con evaluación competencial LOMLOE para fomentar autoconciencia del propio aprendizaje. Universal.
 
-```text
-Inicio  →  Checklist (marcar síntomas observados)  →  Resultados (medidas + evaluación)
-                                                          ↓
-                                              Imprimir / Reiniciar
-```
-
----
-
-### Página de checklist
-
-Síntomas organizados en tres categorías clásicas, presentados como tarjetas con casillas:
-
-- **Inatención** (p. ej. "Se distrae con facilidad ante estímulos externos", "Dificultad para seguir instrucciones de varios pasos", "Olvida materiales o tareas con frecuencia", "Comete errores por descuido en trabajos escritos").
-- **Hiperactividad** (p. ej. "Se levanta del asiento en momentos inapropiados", "Habla en exceso", "Mueve manos o pies constantemente").
-- **Impulsividad** (p. ej. "Interrumpe conversaciones o actividades", "Responde antes de terminar la pregunta", "Dificultad para esperar su turno").
-
-Cada síntoma con una breve descripción al pasar el cursor. Botón "Ver recomendaciones" al final.
+**D. Síntomas:** mantener los 18 actuales, sólo reasignar `measureIds` donde la nueva medida `fragmentacion-tareas` aplique (especialmente `no-termina`, `planificacion-pobre`, `instrucciones-multiples`).
 
 ---
 
-### Página de resultados
+### 2. `src/routes/resultados.tsx` — mostrar nivel y evaluación multidimensional
 
-Para cada síntoma marcado, mostrar una tarjeta con:
-
-- **Síntoma identificado**
-- **Medida(s) recomendada(s)** — acciones concretas en el aula (p. ej. para "se distrae fácilmente": sentar cerca del profesor, eliminar estímulos visuales del entorno, usar señales no verbales).
-- **Método de evaluación** — cómo medir si la medida funciona (p. ej. registro semanal de minutos de atención sostenida durante lectura, comparación de errores por descuido antes/después en una rúbrica).
-
-Las medidas se agrupan al final por categoría para evitar duplicados cuando varios síntomas comparten la misma intervención.
-
-Acciones disponibles: "Imprimir / Guardar como PDF" (usando `window.print` con estilos de impresión) y "Nueva evaluación".
+- Añadir un `Badge` en cada `Measure` que muestre "Medida universal (DUA)" o "Medida individualizada (PAP)".
+- Agrupar las medidas en dos secciones: primero las universales, después las individualizadas, con un párrafo introductorio breve que explique el principio de no segregación.
+- En el bloque "Cómo evaluar su impacto", estructurar visualmente tres ejes cuando estén disponibles: **Académico**, **Conductual/ejecutivo**, **Socioemocional**.
+- Aviso final actualizado: mencionar PAP, Decreto 104/2018 y coordinación con el Departamento de Orientación.
 
 ---
 
-### Diseño
+### 3. `src/routes/acerca.tsx` — contextualizar marco normativo
 
-- Estilo limpio y profesional, apropiado para entorno educativo.
-- Paleta serena (azules/verdes suaves) sobre fondo claro, usando los tokens de tema existentes.
-- Componentes shadcn ya disponibles: Card, Checkbox, Button, Badge, Separator, Alert (para el aviso legal).
-- Totalmente responsive y con vista de impresión optimizada para los resultados.
+- Añadir tarjeta "Marco normativo y pedagógico" mencionando: Decreto 104/2018, Orden 20/2019, LOMLOE (evaluación por competencias) y principios DUA.
+- Añadir tarjeta "Sobre la economía de fichas" explicando por qué la herramienta no recomienda token economy (motivación intrínseca, inclusión, autonomía moral; Kohn, 2018).
+- Reforzar "Recomendaciones de uso" con seguimiento académico + conductual + socioemocional, y revisión flexible más allá de la evaluación final.
 
 ---
 
-### Detalles técnicos
+### 4. `src/routes/index.tsx` — ajuste menor del copy
 
-- Rutas en `src/routes/`: `index.tsx`, `checklist.tsx`, `resultados.tsx`, `acerca.tsx`, cada una con su propio `head()` (título y descripción en español).
-- Cabecera/navegación compartida en un componente `src/components/Header.tsx` montado dentro de `__root.tsx`.
-- Catálogo de síntomas → medidas → evaluaciones en un archivo de datos tipado: `src/data/adhd.ts` (estructura: `Symptom { id, category, label, description, measureIds[] }` y `Measure { id, title, description, evaluation }`).
-- Estado de los síntomas marcados: `useState` en la página de checklist, pasado a `/resultados` vía `search params` (`useSearch`) para que el resultado sea compartible/recargable sin backend.
-- Estilos de impresión en `styles.css` para ocultar navegación al imprimir.
-- Aviso visible en inicio y resultados: la herramienta es orientativa y no sustituye una valoración clínica profesional.
+- Subtítulo y bloques "1-2-3" alineados con la lógica: observar → medidas DUA / individualizadas → evaluación multidimensional.
+- Aviso reforzado: orientativo, complementa al PAP y al Departamento de Orientación.
+
+---
+
+### 5. `src/routes/checklist.tsx`
+
+- Sin cambios estructurales. Posible añadido de una nota previa: "marca tras varias semanas de observación sistemática".
+
+---
+
+## Fuera del alcance
+
+- No se introducen sistemas de puntos/canje en ninguna medida.
+- No se cambia el almacenamiento (sigue siendo single-session).
+- No se añaden rutas nuevas ni dependencias.
+- No se modifica el diseño visual general.

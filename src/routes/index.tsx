@@ -32,11 +32,12 @@ function Index() {
           Herramienta para profesorado
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Identifica el TDAH en el aula y actúa con criterio
+          Identifica el TDAH en Secundaria y actúa con criterio inclusivo
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Marca los síntomas que observas en un estudiante y recibe al instante medidas
-          concretas para aplicar en clase, junto con un método de evaluación para cada una.
+          Marca los síntomas que observas y recibe al instante medidas universales (DUA) e
+          individualizadas (PAP) para el aula, con indicadores académicos, conductuales y
+          socioemocionales para evaluar su impacto.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
@@ -53,17 +54,17 @@ function Index() {
           {
             icon: ClipboardCheck,
             title: "1. Observa y marca",
-            text: "Lista de síntomas de inatención, hiperactividad e impulsividad agrupados por categoría.",
+            text: "Lista de síntomas de inatención, hiperactividad e impulsividad para registrar tras observación sistemática.",
           },
           {
             icon: Lightbulb,
-            title: "2. Recibe medidas",
-            text: "Recomendaciones específicas según los síntomas marcados, listas para aplicar en el aula.",
+            title: "2. Medidas DUA y PAP",
+            text: "Estrategias universales para todo el aula e individualizadas para el PAP, alineadas con el Decreto 104/2018.",
           },
           {
             icon: BarChart3,
-            title: "3. Evalúa el impacto",
-            text: "Cada medida incluye un método claro para medir si está funcionando con el estudiante.",
+            title: "3. Evaluación multidimensional",
+            text: "Indicadores académicos, conductuales/ejecutivos y socioemocionales para revisar el plan con flexibilidad.",
           },
         ].map(({ icon: Icon, title, text }) => (
           <div
@@ -82,9 +83,9 @@ function Index() {
       <Alert className="mt-16">
         <AlertTitle>Aviso importante</AlertTitle>
         <AlertDescription>
-          Esta herramienta es orientativa y está pensada como apoyo pedagógico. No constituye
-          un diagnóstico clínico ni sustituye la valoración de profesionales sanitarios o de
-          orientación educativa.
+          Esta herramienta es orientativa y complementa —no sustituye— al Plan de Actuación
+          Personalizado y a la valoración del Departamento de Orientación y de profesionales
+          sanitarios.
         </AlertDescription>
       </Alert>
     </main>
