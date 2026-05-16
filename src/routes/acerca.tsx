@@ -9,12 +9,12 @@ export const Route = createFileRoute("/acerca")({
       {
         name: "description",
         content:
-          "Propósito, alcance y limitaciones de AulaTDAH, herramienta orientativa para el profesorado.",
+          "Marco normativo y pedagógico de AulaTDAH: DUA, Decreto 104/2018, Orden 20/2019 y LOMLOE.",
       },
       { property: "og:title", content: "Acerca de AulaTDAH" },
       {
         property: "og:description",
-        content: "Conoce el propósito, alcance y limitaciones de esta herramienta educativa.",
+        content: "Propósito, marco normativo y limitaciones de la herramienta.",
       },
     ],
   }),
@@ -28,8 +28,9 @@ function AcercaPage() {
         Acerca de AulaTDAH
       </h1>
       <p className="mt-4 text-muted-foreground">
-        Una herramienta gratuita y de uso libre, pensada para apoyar al profesorado en la
-        observación, intervención y evaluación de posibles indicadores de TDAH en el aula.
+        Herramienta gratuita y de uso libre, pensada para apoyar al profesorado de
+        Educación Secundaria en la observación, intervención y evaluación de posibles
+        indicadores de TDAH en el aula, bajo un enfoque inclusivo.
       </p>
 
       <div className="mt-10 space-y-6">
@@ -39,9 +40,58 @@ function AcercaPage() {
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-foreground">
             <p>
-              Permite registrar de forma estructurada las conductas observadas en un
-              estudiante y traducirlas en un plan de medidas concretas para el aula, cada
-              una con un método de evaluación claro para comprobar su eficacia.
+              Permite registrar de forma estructurada las conductas observadas y traducirlas
+              en un plan de medidas para el aula, distinguiendo entre medidas universales
+              (DUA, aplicables a todo el grupo) e individualizadas (vinculadas al Plan de
+              Actuación Personalizado), cada una con un método de evaluación que incluye
+              indicadores académicos, conductuales/ejecutivos y socioemocionales.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Marco normativo y pedagógico</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-foreground">
+            <p>
+              Las medidas se estructuran siguiendo el Decreto 104/2018 y la Orden 20/2019,
+              que definen los niveles de respuesta a la inclusión educativa, y se diseñan
+              bajo los principios del Diseño Universal del Aprendizaje (DUA) para minimizar
+              barreras al aprendizaje y la participación.
+            </p>
+            <p>
+              La evaluación del impacto sigue el modelo competencial de la LOMLOE: el éxito
+              no se reduce a la nota numérica, sino que valora el desempeño integral del
+              alumnado en distintas capacidades.
+            </p>
+            <p>
+              Las medidas individualizadas se vinculan al PAP. La Orden 20/2019 prevé
+              reuniones de revisión coincidentes con las sesiones de evaluación; la
+              herramienta recomienda, además, revisiones flexibles cuando los indicadores
+              muestren estancamiento, sin esperar a la evaluación final.
+            </p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Sobre la economía de fichas</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 text-sm text-foreground">
+            <p>
+              Esta herramienta no incluye sistemas de economía de fichas (token economy).
+              Aunque pueden reducir conductas disruptivas a corto plazo, sustituyen la
+              motivación intrínseca por una motivación basada en recompensas externas y
+              funcionan como un mecanismo de control conductual que prioriza la sumisión
+              sobre la autonomía moral (Kohn, 2018).
+            </p>
+            <p>
+              Desde una perspectiva inclusiva, el objetivo no es obligar al alumnado
+              neurodivergente a adaptarse a la norma, sino expandir la educación para que
+              sea accesible respetando sus condiciones y diferencias. En su lugar, esta
+              herramienta recomienda la alabanza descriptiva específica e inmediata como
+              estrategia de refuerzo positivo.
             </p>
           </CardContent>
         </Card>
@@ -53,9 +103,9 @@ function AcercaPage() {
           <CardContent className="space-y-2 text-sm text-foreground">
             <p>
               No es una prueba diagnóstica ni una escala validada clínicamente. No sustituye
-              la valoración de profesionales de la salud mental ni del equipo de orientación
-              educativa. Las decisiones sobre adaptaciones formales o derivaciones deben
-              tomarse siempre con apoyo de estos profesionales.
+              la valoración de profesionales de la salud mental ni del Departamento de
+              Orientación. Las decisiones sobre adaptaciones formales, derivaciones o
+              elaboración del PAP deben tomarse siempre con su apoyo.
             </p>
           </CardContent>
         </Card>
@@ -78,10 +128,13 @@ function AcercaPage() {
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-foreground">
             <p>
-              Realiza la observación durante varias semanas antes de marcar los síntomas.
-              Comparte el plan resultante con el equipo docente y la familia, y mantén el
-              registro de evaluación al menos durante dos o tres semanas para valorar el
-              impacto real de las medidas.
+              Realiza la observación sistemática durante varias semanas antes de marcar
+              síntomas. Comparte el plan con el equipo docente y la familia, y mantén el
+              registro de evaluación durante al menos dos o tres semanas en los tres ejes:
+              académico (entregas en plazo, errores por descuido, evolución competencial),
+              conductual/ejecutivo (autonomía organizativa, atención sostenida, espera de
+              turno) y socioemocional (autoconcepto académico, tolerancia a la frustración,
+              vínculos con iguales).
             </p>
           </CardContent>
         </Card>
