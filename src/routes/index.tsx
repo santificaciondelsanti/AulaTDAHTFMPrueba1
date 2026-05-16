@@ -83,9 +83,9 @@ function Index() {
       <Alert className="mt-16">
         <AlertTitle>Aviso importante</AlertTitle>
         <AlertDescription>
-          Esta herramienta es orientativa y está pensada como apoyo pedagógico. No constituye
-          un diagnóstico clínico ni sustituye la valoración de profesionales sanitarios o de
-          orientación educativa.
+          Esta herramienta es orientativa y complementa —no sustituye— al Plan de Actuación
+          Personalizado y a la valoración del Departamento de Orientación y de profesionales
+          sanitarios.
         </AlertDescription>
       </Alert>
     </main>
