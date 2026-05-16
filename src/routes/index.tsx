@@ -54,17 +54,17 @@ function Index() {
           {
             icon: ClipboardCheck,
             title: "1. Observa y marca",
-            text: "Lista de síntomas de inatención, hiperactividad e impulsividad agrupados por categoría.",
+            text: "Lista de síntomas de inatención, hiperactividad e impulsividad para registrar tras observación sistemática.",
           },
           {
             icon: Lightbulb,
-            title: "2. Recibe medidas",
-            text: "Recomendaciones específicas según los síntomas marcados, listas para aplicar en el aula.",
+            title: "2. Medidas DUA y PAP",
+            text: "Estrategias universales para todo el aula e individualizadas para el PAP, alineadas con el Decreto 104/2018.",
           },
           {
             icon: BarChart3,
-            title: "3. Evalúa el impacto",
-            text: "Cada medida incluye un método claro para medir si está funcionando con el estudiante.",
+            title: "3. Evaluación multidimensional",
+            text: "Indicadores académicos, conductuales/ejecutivos y socioemocionales para revisar el plan con flexibilidad.",
           },
         ].map(({ icon: Icon, title, text }) => (
           <div
