@@ -32,11 +32,12 @@ function Index() {
           Herramienta para profesorado
         </span>
         <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Identifica el TDAH en el aula y actúa con criterio
+          Identifica el TDAH en Secundaria y actúa con criterio inclusivo
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Marca los síntomas que observas en un estudiante y recibe al instante medidas
-          concretas para aplicar en clase, junto con un método de evaluación para cada una.
+          Marca los síntomas que observas y recibe al instante medidas universales (DUA) e
+          individualizadas (PAP) para el aula, con indicadores académicos, conductuales y
+          socioemocionales para evaluar su impacto.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
