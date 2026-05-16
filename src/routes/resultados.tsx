@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { Printer, RotateCcw, ClipboardList, Target, LineChart } from "lucide-react";
+import { Printer, RotateCcw, ClipboardList, Target, LineChart, Users, UserCog } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,9 +9,11 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import {
   categoryLabels,
+  levelLabels,
   measures,
   symptoms,
   type Category,
+  type Measure,
   type Symptom,
 } from "@/data/adhd";
 
@@ -27,23 +29,109 @@ export const Route = createFileRoute("/resultados")({
       {
         name: "description",
         content:
-          "Medidas concretas para el aula y métodos de evaluación según los síntomas marcados.",
+          "Medidas DUA e individualizadas para el aula, con evaluación académica, conductual y socioemocional.",
       },
       { property: "og:title", content: "Resultados y medidas recomendadas — AulaTDAH" },
       {
         property: "og:description",
-        content: "Plan de actuación con medidas y evaluación para cada síntoma identificado.",
+        content: "Plan de actuación con medidas y evaluación multidimensional según marco DUA/PAP.",
       },
     ],
   }),
   component: ResultadosPage,
 });
 
+function renderEvaluation(text: string) {
+  // Split by newlines and render each as a paragraph; lines starting with
+  // "Académico:", "Conductual/ejecutivo:" or "Socioemocional:" get a small label.
+  const blocks = text.split("\n").filter((l) => l.trim().length > 0);
+  return (
+    <div className="mt-2 space-y-2 text-sm text-foreground">
+      {blocks.map((block, i) => {
+        const match = block.match(/^(Académico|Conductual\/ejecutivo|Socioemocional|Académico\/conductual|Académico\/conductual\/socioemocional)\s*:\s*(.*)$/);
+        if (match) {
+          return (
+            <p key={i}>
+              <span className="font-semibold text-foreground">{match[1]}:</span>{" "}
+              <span className="text-foreground/90">{match[2]}</span>
+            </p>
+          );
+        }
+        return (
+          <p key={i} className="text-foreground/90">
+            {block}
+          </p>
+        );
+      })}
+    </div>
+  );
+}
+
+function MeasureCard({
+  measure,
+  relatedSymptoms,
+}: {
+  measure: Measure;
+  relatedSymptoms: Symptom[];
+}) {
+  return (
+    <Card className="print:break-inside-avoid">
+      <CardHeader>
+        <div className="flex flex-wrap items-start justify-between gap-2">
+          <div className="space-y-2">
+            <CardTitle className="text-lg">{measure.title}</CardTitle>
+            <Badge
+              variant={measure.level === "universal" ? "secondary" : "default"}
+              className="text-xs font-normal"
+            >
+              {measure.level === "universal" ? (
+                <Users className="mr-1 h-3 w-3" />
+              ) : (
+                <UserCog className="mr-1 h-3 w-3" />
+              )}
+              {levelLabels[measure.level]}
+            </Badge>
+          </div>
+          <div className="flex flex-wrap gap-1">
+            {relatedSymptoms.map((s) => (
+              <Badge key={s.id} variant="outline" className="text-xs font-normal">
+                {categoryLabels[s.category]}
+              </Badge>
+            ))}
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="whitespace-pre-line text-sm text-foreground">{measure.description}</p>
+        <div className="rounded-lg border border-border bg-muted/40 p-4">
+          <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+            <LineChart className="h-3.5 w-3.5" />
+            Cómo evaluar su impacto
+          </p>
+          {renderEvaluation(measure.evaluation)}
+        </div>
+        {relatedSymptoms.length > 0 && (
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+              Responde a:
+            </p>
+            <ul className="mt-1 space-y-1">
+              {relatedSymptoms.map((s) => (
+                <li key={s.id} className="text-sm text-muted-foreground">
+                  — {s.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
 function ResultadosPage() {
   const { ids } = Route.useSearch();
-  const selectedIds = ids
-    ? ids.split(",").filter(Boolean)
-    : [];
+  const selectedIds = ids ? ids.split(",").filter(Boolean) : [];
 
   const selectedSymptoms = symptoms.filter((s) => selectedIds.includes(s.id));
 
@@ -68,7 +156,6 @@ function ResultadosPage() {
     );
   }
 
-  // Group symptoms by category
   const byCategory: Record<Category, Symptom[]> = {
     inatencion: [],
     hiperactividad: [],
@@ -76,12 +163,17 @@ function ResultadosPage() {
   };
   selectedSymptoms.forEach((s) => byCategory[s.category].push(s));
 
-  // Aggregate unique recommended measures
   const measureIdSet = new Set<string>();
   selectedSymptoms.forEach((s) => s.measureIds.forEach((m) => measureIdSet.add(m)));
   const recommendedMeasures = Array.from(measureIdSet)
     .map((id) => measures[id])
     .filter(Boolean);
+
+  const universal = recommendedMeasures.filter((m) => m.level === "universal");
+  const individualizadas = recommendedMeasures.filter((m) => m.level === "individualizada");
+
+  const relatedFor = (measure: Measure) =>
+    selectedSymptoms.filter((s) => s.measureIds.includes(measure.id));
 
   return (
     <main className="mx-auto max-w-4xl px-4 py-12 print:py-6">
@@ -92,9 +184,9 @@ function ResultadosPage() {
           </h1>
           <p className="mt-2 text-muted-foreground">
             {selectedSymptoms.length} síntoma{selectedSymptoms.length === 1 ? "" : "s"} identificado
-            {selectedSymptoms.length === 1 ? "" : "s"} · {recommendedMeasures.length} medida
-            {recommendedMeasures.length === 1 ? "" : "s"} recomendada
-            {recommendedMeasures.length === 1 ? "" : "s"}
+            {selectedSymptoms.length === 1 ? "" : "s"} · {universal.length} medida
+            {universal.length === 1 ? "" : "s"} universal{universal.length === 1 ? "" : "es"} ·{" "}
+            {individualizadas.length} individualizada{individualizadas.length === 1 ? "" : "s"}
           </p>
         </div>
         <div className="flex gap-2 print:hidden">
@@ -145,66 +237,57 @@ function ResultadosPage() {
 
       <Separator className="my-8" />
 
-      <section>
-        <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
-          <Target className="h-5 w-5 text-primary" />
-          Medidas recomendadas y evaluación
-        </h2>
-        <div className="space-y-4">
-          {recommendedMeasures.map((measure) => {
-            const relatedSymptoms = selectedSymptoms.filter((s) =>
-              s.measureIds.includes(measure.id),
-            );
-            return (
-              <Card key={measure.id} className="print:break-inside-avoid">
-                <CardHeader>
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <CardTitle className="text-lg">{measure.title}</CardTitle>
-                    <div className="flex flex-wrap gap-1">
-                      {relatedSymptoms.map((s) => (
-                        <Badge key={s.id} variant="secondary" className="text-xs font-normal">
-                          {categoryLabels[s.category]}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-foreground">{measure.description}</p>
-                  <div className="rounded-lg border border-border bg-muted/40 p-4">
-                    <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      <LineChart className="h-3.5 w-3.5" />
-                      Cómo evaluar su impacto
-                    </p>
-                    <p className="mt-2 text-sm text-foreground">{measure.evaluation}</p>
-                  </div>
-                  {relatedSymptoms.length > 0 && (
-                    <div>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                        Responde a:
-                      </p>
-                      <ul className="mt-1 space-y-1">
-                        {relatedSymptoms.map((s) => (
-                          <li key={s.id} className="text-sm text-muted-foreground">
-                            — {s.label}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            );
-          })}
+      <section className="mb-10">
+        <div className="mb-4 flex items-center justify-between gap-2">
+          <h2 className="flex items-center gap-2 text-xl font-semibold">
+            <Target className="h-5 w-5 text-primary" />
+            Medidas universales (DUA)
+          </h2>
         </div>
+        <p className="mb-4 text-sm text-muted-foreground">
+          Diseñadas bajo principios del Diseño Universal del Aprendizaje. Se aplican a todo
+          el grupo, evitan la segregación del alumnado con TDAH y benefician al conjunto del
+          aula (Decreto 104/2018, niveles 1-2 de respuesta).
+        </p>
+        {universal.length === 0 ? (
+          <p className="text-sm text-muted-foreground">
+            Ninguna medida universal recomendada para los síntomas marcados.
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {universal.map((m) => (
+              <MeasureCard key={m.id} measure={m} relatedSymptoms={relatedFor(m)} />
+            ))}
+          </div>
+        )}
       </section>
+
+      {individualizadas.length > 0 && (
+        <section>
+          <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+            <UserCog className="h-5 w-5 text-primary" />
+            Medidas individualizadas (PAP)
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            Requieren coordinación con el Departamento de Orientación y, en su caso, la
+            incorporación o revisión del Plan de Actuación Personalizado conforme a la Orden
+            20/2019 (niveles 3-4 de respuesta).
+          </p>
+          <div className="space-y-4">
+            {individualizadas.map((m) => (
+              <MeasureCard key={m.id} measure={m} relatedSymptoms={relatedFor(m)} />
+            ))}
+          </div>
+        </section>
+      )}
 
       <Alert className="mt-10 print:mt-6">
         <AlertTitle>Recuerda</AlertTitle>
         <AlertDescription>
           Las medidas son orientativas. Coordina su aplicación con el equipo de orientación
-          del centro y con la familia, y registra los datos de evaluación durante al menos
-          dos o tres semanas antes de extraer conclusiones.
+          (Decreto 104/2018, Orden 20/2019) y con la familia. Registra los datos durante al
+          menos dos o tres semanas y revisa el plan con flexibilidad cuando los indicadores
+          muestren estancamiento, sin esperar a la evaluación final del trimestre.
         </AlertDescription>
       </Alert>
     </main>
