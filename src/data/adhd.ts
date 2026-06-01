@@ -290,7 +290,7 @@ export const symptoms: Symptom[] = [
     label: "No termina las tareas o exámenes que empieza",
     description:
       "Abandona la actividad o deja preguntas en blanco al final del examen aunque sepa hacerlas.",
-    measureIds: ["fragmentacion-tareas", "tiempo-tarea", "refuerzo-positivo", "examen-adaptado"],
+    measureIds: ["fragmentacion-tareas", "tiempo-tarea", "refuerzo-positivo", "examen-adaptado", "examen-dos-sesiones"],
   },
   {
     id: "parece-no-escuchar",
