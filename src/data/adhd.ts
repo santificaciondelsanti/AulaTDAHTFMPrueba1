@@ -314,7 +314,7 @@ export const symptoms: Symptom[] = [
     label: "Rendimiento académico muy irregular entre materias o pruebas",
     description:
       "Alterna calificaciones altas y bajas sin patrón claro, dependiendo del docente, formato del examen o estado del día.",
-    measureIds: ["coordinacion-orientacion", "tutoria-individual", "rubrica-competencial", "examen-adaptado"],
+    measureIds: ["coordinacion-orientacion", "tutoria-individual", "rubrica-competencial", "examen-adaptado", "examen-dos-sesiones"],
   },
 
   // Hiperactividad
