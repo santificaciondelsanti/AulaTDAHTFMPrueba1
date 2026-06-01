@@ -1,12 +1,37 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
-import { Printer, RotateCcw, ClipboardList, Target, LineChart, Users, UserCog } from "lucide-react";
+import {
+  Printer,
+  RotateCcw,
+  ClipboardList,
+  Target,
+  LineChart,
+  Users,
+  UserCog,
+  Share2,
+  Link2,
+  Mail,
+  FileDown,
+  Send,
+  Check,
+} from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { toast } from "@/components/ui/sonner";
+
 import {
   categoryLabels,
   levelLabels,
