@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ResultadosRouteImport } from './routes/resultados'
+import { Route as RecursosRouteImport } from './routes/recursos'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as AcercaRouteImport } from './routes/acerca'
 import { Route as IndexRouteImport } from './routes/index'
@@ -17,6 +18,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const ResultadosRoute = ResultadosRouteImport.update({
   id: '/resultados',
   path: '/resultados',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecursosRoute = RecursosRouteImport.update({
+  id: '/recursos',
+  path: '/recursos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChecklistRoute = ChecklistRouteImport.update({
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
+  '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
+  '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
+  '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/acerca' | '/checklist' | '/resultados'
+  fullPaths: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acerca' | '/checklist' | '/resultados'
-  id: '__root__' | '/' | '/acerca' | '/checklist' | '/resultados'
+  to: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
+  id: '__root__' | '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AcercaRoute: typeof AcercaRoute
   ChecklistRoute: typeof ChecklistRoute
+  RecursosRoute: typeof RecursosRoute
   ResultadosRoute: typeof ResultadosRoute
 }
 
@@ -76,6 +86,13 @@ declare module '@tanstack/react-router' {
       path: '/resultados'
       fullPath: '/resultados'
       preLoaderRoute: typeof ResultadosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recursos': {
+      id: '/recursos'
+      path: '/recursos'
+      fullPath: '/recursos'
+      preLoaderRoute: typeof RecursosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checklist': {
@@ -106,8 +123,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AcercaRoute: AcercaRoute,
   ChecklistRoute: ChecklistRoute,
+  RecursosRoute: RecursosRoute,
   ResultadosRoute: ResultadosRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}
