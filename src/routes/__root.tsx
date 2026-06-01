@@ -78,6 +78,7 @@ function RootComponent() {
     <div className="min-h-screen bg-background">
       <Header />
       <Outlet />
+      <Toaster />
     </div>
   );
 }
