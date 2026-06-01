@@ -28,20 +28,19 @@ function AcercaPage() {
         Acerca de AulaTDAH
       </h1>
       <p className="mt-4 text-muted-foreground">
-        Herramienta gratuita y de uso libre, pensada para apoyar al profesorado de
-        Educación Secundaria en la observación, intervención y evaluación de posibles
-        indicadores de TDAH en el aula, bajo un enfoque inclusivo.
+       Herramienta conceptual que busca dar recursos a docentes para poder elaborar, evaluar, gestionar y cooperar a
+       la hora de crear medidas para el alumnado TDAH.
       </p>
 
       <div className="mt-10 space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>¿Para qué sirve?</CardTitle>
+            <CardTitle>Usos</CardTitle>
           </CardHeader>
           <CardContent className="space-y-2 text-sm text-foreground">
             <p>
               Permite registrar de forma estructurada las conductas observadas y traducirlas
-              en un plan de medidas para el aula, distinguiendo entre medidas universales
+              en un listado de medidas para el aula, distinguiendo entre medidas universales
               (DUA, aplicables a todo el grupo) e individualizadas (vinculadas al Plan de
               Actuación Personalizado), cada una con un método de evaluación que incluye
               indicadores académicos, conductuales/ejecutivos y socioemocionales.
@@ -70,28 +69,6 @@ function AcercaPage() {
               reuniones de revisión coincidentes con las sesiones de evaluación; la
               herramienta recomienda, además, revisiones flexibles cuando los indicadores
               muestren estancamiento, sin esperar a la evaluación final.
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Sobre la economía de fichas</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-foreground">
-            <p>
-              Esta herramienta no incluye sistemas de economía de fichas (token economy).
-              Aunque pueden reducir conductas disruptivas a corto plazo, sustituyen la
-              motivación intrínseca por una motivación basada en recompensas externas y
-              funcionan como un mecanismo de control conductual que prioriza la sumisión
-              sobre la autonomía moral (Kohn, 2018).
-            </p>
-            <p>
-              Desde una perspectiva inclusiva, el objetivo no es obligar al alumnado
-              neurodivergente a adaptarse a la norma, sino expandir la educación para que
-              sea accesible respetando sus condiciones y diferencias. En su lugar, esta
-              herramienta recomienda la alabanza descriptiva específica e inmediata como
-              estrategia de refuerzo positivo.
             </p>
           </CardContent>
         </Card>
@@ -142,9 +119,11 @@ function AcercaPage() {
 
       <div className="mt-10">
         <Button asChild size="lg">
-          <Link to="/checklist">Comenzar evaluación</Link>
+          <Link to="/feedback">Comenzar evaluación</Link>
         </Button>
       </div>
+
     </main>
+    
   );
 }

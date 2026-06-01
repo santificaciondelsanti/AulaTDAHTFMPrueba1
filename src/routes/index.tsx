@@ -28,20 +28,22 @@ function Index() {
     <main className="mx-auto max-w-5xl px-4 py-16">
       <section className="text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-border bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-          <Brain className="h-3.5 w-3.5" />
-          Herramienta para profesorado
+          <Brain className="h-20 w-20" />
+
         </span>
-        <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Identifica el TDAH en Secundaria y actúa con criterio inclusivo
+        <h1 className="mt-6 text-4xl font-bold tracking-tight text-foreground sm:text-10xl">
+          Exposición TFM - AulaTDAH - Santiago Álvarez
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          Marca los síntomas que observas y recibe al instante medidas universales (DUA) e
+          Prototipo de plataforma para crear, modificar y supervisar medidas para el alumnado TDAH de manera colaborativa entre docentes
+          <br></br><br></br>
+          Marcando la sintomatología observada en el listado recibirá medidas universales (DUA) e
           individualizadas (PAP) para el aula, con indicadores académicos, conductuales y
           socioemocionales para evaluar su impacto.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg">
-            <Link to="/checklist">Comenzar evaluación</Link>
+            <Link to="/checklist">Comenzar prueba</Link>
           </Button>
           <Button asChild variant="outline" size="lg">
             <Link to="/acerca">Cómo funciona</Link>
@@ -58,7 +60,7 @@ function Index() {
           },
           {
             icon: Lightbulb,
-            title: "2. Medidas DUA y PAP",
+            title: "2. Listado de medidas",
             text: "Estrategias universales para todo el aula e individualizadas para el PAP, alineadas con el Decreto 104/2018.",
           },
           {
@@ -79,15 +81,7 @@ function Index() {
           </div>
         ))}
       </section>
-
-      <Alert className="mt-16">
-        <AlertTitle>Aviso importante</AlertTitle>
-        <AlertDescription>
-          Esta herramienta es orientativa y complementa —no sustituye— al Plan de Actuación
-          Personalizado y a la valoración del Departamento de Orientación y de profesionales
-          sanitarios.
-        </AlertDescription>
-      </Alert>
     </main>
   );
+
 }

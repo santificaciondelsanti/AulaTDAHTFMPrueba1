@@ -56,16 +56,12 @@ const resources: Resource[] = [
     category: "Normativa",
   },
   {
-    title: "Guía Fundación CADAH (2023)",
+    title: "Guía GVA",
     description:
       "Adaptaciones metodológicas más frecuentes para alumnado con TDAH en Secundaria.",
     category: "Guía",
-  },
-  {
-    title: "Hervás-Torres (2022) — Inclusión y atención",
-    description:
-      "Bases de las instrucciones directas y verificación de la comprensión.",
-    category: "Artículo",
+    url: "https://ceice.gva.es/documents/162640733/162655257/GuiaTDAH_Profesores_modificada.pdf/529df505-517c-41b3-84dd-2122f8e0cbb9", 
+    pages: 28
   },
   {
     title: "Plantilla de registro de observación",
@@ -137,32 +133,34 @@ function RecursosPage() {
       <header className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Recursos
+            Recursos generales
           </h1>
           <p className="mt-2 max-w-2xl text-muted-foreground">
             Documentos normativos, guías y plantillas de referencia para acompañar la
             implementación y la evaluación de las medidas.
           </p>
         </div>
-        <Button variant="outline" disabled>
-          <Plus className="mr-2 h-4 w-4" />
-          Añadir PDF (próximamente)
-        </Button>
-      </header>
 
-      <Alert className="mb-8">
-        <AlertTitle>Sección en construcción</AlertTitle>
-        <AlertDescription>
-          Esta es una vista prototipo. Los PDFs definitivos se irán incorporando como
-          recursos descargables vinculados a esta página.
-        </AlertDescription>
-      </Alert>
+      </header>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {resources.map((r) => (
           <ResourceCard key={r.title} resource={r} />
         ))}
-      </div>
+      </div><br></br><br></br><br></br>
+ <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Recursos compartidos
+          </h1>
+                    <p className="mt-2 max-w-2xl text-muted-foreground">
+            En esta sección aparecen medidas y evaluaciones subidas por otros profesionales, a modo de repositorio público donde escoger medidas
+            no dadas por la propia web e incluirlas en el apartado de mis medidas.
+          </p><br></br>
+          <Button variant="outline" disabled>
+          <Plus className="mr-2 h-4 w-4" />
+          Subir un recurso compartido
+        </Button>
     </main>
+
   );
 }
+

@@ -54,16 +54,16 @@ export const measures: Record<string, Measure> = {
     id: "asiento-estrategico",
     title: "Ubicación estratégica en el aula",
     description:
-      "Ubicar al alumno o alumna cerca del profesorado, en la zona central de visión, y alejarlo de distractores visuales y sonoros (ventanas, puerta, compañeros muy estimulantes). Justificar la decisión como apoyo a la concentración —no como castigo— y acordarla con el equipo docente para mantenerla en todas las materias. Especialmente útil en etapas previas; en Secundaria se combina con estrategias de autonomía organizativa.",
+      "Ubicar al alumno o alumna cerca del profesorado, en la zona central de visión, y alejarlo de distractores visuales y sonoros (ventanas, puerta, compañeros muy estimulantes). Justificar la decisión como apoyo a la concentración —no como castigo— y acordarla con el equipo docente para mantenerla en todas las materias.",
     level: "universal",
     evaluation:
-      "Conductual/ejecutivo: registro de observación de 4 sesiones semanales (al menos 2 materias) anotando minutos de atención sostenida en intervalos de 10 min. Línea base de 1 semana previa; seguimiento de 3 semanas. Criterio de éxito: aumento ≥30 % del tiempo en tarea y reducción visible de redirecciones públicas.\nSocioemocional: comprobar en tutoría que el alumnado no percibe la ubicación como estigmatizante.",
+      "Conductual/ejecutivo: registro de observación de 4 sesiones semanales, anotando intervalos de atención sostenida. Línea base de 1 semana previa; seguimiento de 3 semanas. Criterio de éxito: aumento ≥30 % del tiempo en tarea y reducción visible de redirecciones públicas.\nSocioemocional: comprobar en tutoría que el alumnado no percibe la ubicación como estigmatizante.",
   },
   "instrucciones-segmentadas": {
     id: "instrucciones-segmentadas",
     title: "Instrucciones directas, segmentadas y verificadas",
     description:
-      "Dar las consignas de una en una, con frases cortas y apoyo visual (pizarra, tarjeta, aula virtual), y verificar la comprensión pidiendo al estudiante que parafrasee o ponga un ejemplo antes de iniciar la actividad. Hervás-Torres (2022) señala que la inclusión efectiva requiere instrucciones directas, breves y con apoyo visual, garantizando que el alumno ha comprendido la demanda antes de empezar para mitigar la distractibilidad.",
+      "Dar las consignas de una en una, con frases cortas y apoyo visual (pizarra, tarjeta, aula virtual), y verificar la comprensión pidiendo al estudiante que parafrasee o ponga un ejemplo antes de iniciar la actividad. La inclusión efectiva requiere instrucciones directas, breves y con apoyo visual, garantizando que el alumno ha comprendido la demanda antes de empezar para mitigar la distractibilidad.",
     level: "universal",
     evaluation:
       "Académico: hoja de seguimiento con 3 indicadores por sesión: (1) inicia la tarea en <2 min, (2) realiza los pasos en orden, (3) entrega completa. Línea base de 5 sesiones previas; seguimiento diario durante 2 semanas. Criterio de éxito: pasar de ≤40 % a ≥75 % de tareas iniciadas correctamente sin reexplicación individual.\nConductual/ejecutivo: reducción del número de preguntas \"¿qué hay que hacer?\" tras la consigna.",
@@ -248,6 +248,42 @@ export const measures: Record<string, Measure> = {
     evaluation:
       "Socioemocional: ficha mensual con escala 1-5 en los tres indicadores (autoconcepto, vínculos, tolerancia a la frustración) cumplimentada por familia y tutor/a; comentario cualitativo breve. Triangular con autoinforme del alumnado en tutoría. Criterio de éxito: mejora sostenida ≥1 punto en al menos dos indicadores y ausencia de episodios disruptivos graves durante 6 semanas consecutivas.\nConductual/ejecutivo: registro de tareas abandonadas tras error o corrección; descenso ≥40 % respecto a la línea base.",
   },
+  "calendario-entregas-flexible": {
+    id: "calendario-entregas-flexible",
+    title: "Flexibilidad y secuenciación en el calendario de entregas",
+    description:
+      "Pactar con el estudiante, la familia y el Departamento de Orientación un calendario personalizado para proyectos o trabajos extensos. Se permite un margen de entrega justificado (p. ej., 48-72 horas) sin penalización en la calificación, o se fragmenta el trabajo final en entregas parciales obligatorias. Mitiga la parálisis por análisis y evita el abandono por acumulación de tareas.",
+    level: "individualizada",
+    evaluation:
+      "Académico: % de trabajos entregados en el plazo ampliado frente al histórico de entregas en blanco o fuera de plazo. Línea base de 3 proyectos previos.\nConductual/ejecutivo: registro de las sesiones de planificación con la tutoría para el control de subtareas. Criterio de éxito: entrega del ≥80 % de las tareas asignadas dentro del marco flexible acordado.\nSocioemocional: reducción de los niveles de ansiedad declarados por el alumno ante las fechas límite.",
+  },
+  "formatos-alternativos-evaluacion": {
+    id: "formatos-alternativos-evaluacion",
+    title: "Formatos alternativos para producciones y evidencias de aprendizaje",
+    description:
+      "Permitir que el estudiante demuestre la adquisición de competencias específicas a través de formatos no estrictamente escritos cuando la disgrafía o el bloqueo ejecutivo mermen su rendimiento. El PAP puede autorizar: defensas orales breves, mapas conceptuales explicados, grabaciones de audio/video o la entrega de trabajos en formato digital con procesador de texto dotado de soporte ortográfico dentro del aula.",
+    level: "individualizada",
+    evaluation:
+      "Académico: evaluación competencial mediante rúbricas que prioricen el fondo cognitivo sobre la forma de la entrega escrita. Comparación con exámenes tradicionales.\nConductual/ejecutivo: reducción del tiempo de bloqueo antes de iniciar la tarea. Criterio de éxito: incremento ≥2 puntos en producciones alternativas y eliminación de las entregas vacías.\nSocioemocional: mejora del autoconcepto académico al poder expresar fielmente sus conocimientos.",
+  },
+  "espacio-descompresion": {
+    id: "espacio-descompresion",
+    title: "Pase de acceso a espacio de descompresión cognitiva o emocional",
+    description:
+      "Autorizar mediante el PAP una estrategia de salida discreta y pactada (tarjeta física o código no verbal) para que el alumno pueda abandonar el aula temporalmente (5-10 minutos) si identifica saturación cognitiva, inquietud motora extrema o desregulación emocional inminente. El destino será un espacio del centro predeterminado (Biblioteca, Departamento de Orientación) bajo supervisión pasiva de un profesional de referencia.",
+    level: "individualizada",
+    evaluation:
+      "Conductual/ejecutivo: registro del número de usos semanales, duración de la ausencia y capacidad del alumno para reincorporarse al aula de manera autónoma.\nSocioemocional: observación cualitativa de conflictos en el aula y conductas desreguladas. Criterio de éxito: reducción ≥70 % de crisis o expulsiones públicas del aula, sustituyéndolas por estrategias de autogestión del estrés.",
+  },
+  "contrato-conductual-individual": {
+    id: "contrato-conductual-individual",
+    title: "Contrato de contingencias conductual y académico personalizado",
+    description:
+      "Documento de acuerdo mutuo firmado por el alumno, la tutoría y la familia. Establece un máximo de 2 o 3 conductas meta muy operativizadas (p. ej., 'solicitar el turno de palabra en clase de manera no verbal', 'finalizar al menos una micrometa de trabajo individual'). Vincula directamente su cumplimiento con reforzadores significativos e inmediatos tanto en el centro como en el entorno familiar.",
+    level: "individualizada",
+    evaluation:
+      "Conductual/ejecutivo: checklist diario de frecuencia/cumplimiento de las conductas diana del contrato. Línea base de 2 semanas sin intervención.\nSocioemocional: nivel de implicación y firma del alumno en la revisión semanal del contrato. Criterio de éxito: mantenimiento de un porcentaje de cumplimiento ≥75 % de los objetivos semanales durante 4 semanas consecutivas.",
+  },
 };
 
 export const symptoms: Symptom[] = [
@@ -274,7 +310,8 @@ export const symptoms: Symptom[] = [
     label: "Olvida materiales, deberes o entregas con frecuencia",
     description:
       "Pierde apuntes, no trae el libro de la materia o no anota las tareas, lo que genera retrasos acumulativos en varias asignaturas.",
-    measureIds: ["agenda-tareas", "apoyo-visual", "tutoria-individual", "entrenamiento-organizativo"],
+    // Se añade: calendario-entregas-flexible
+    measureIds: ["agenda-tareas", "apoyo-visual", "tutoria-individual", "entrenamiento-organizativo", "calendario-entregas-flexible"],
   },
   {
     id: "errores-descuido",
@@ -282,7 +319,8 @@ export const symptoms: Symptom[] = [
     label: "Comete errores por descuido en trabajos y exámenes",
     description:
       "Salta enunciados, confunde signos, copia mal datos o no revisa, pese a dominar el contenido.",
-    measureIds: ["rubrica-revision", "rubrica-competencial", "tiempo-tarea", "examen-adaptado", "lectura-enunciado"],
+    // Se añade: formatos-alternativos-evaluacion
+    measureIds: ["rubrica-revision", "rubrica-competencial", "tiempo-tarea", "examen-adaptado", "lectura-enunciado", "formatos-alternativos-evaluacion"],
   },
   {
     id: "no-termina",
@@ -290,7 +328,8 @@ export const symptoms: Symptom[] = [
     label: "No termina las tareas o exámenes que empieza",
     description:
       "Abandona la actividad o deja preguntas en blanco al final del examen aunque sepa hacerlas.",
-    measureIds: ["fragmentacion-tareas", "tiempo-tarea", "refuerzo-positivo", "examen-adaptado", "examen-dos-sesiones"],
+    // Se añade: formatos-alternativos-evaluacion
+    measureIds: ["fragmentacion-tareas", "tiempo-tarea", "refuerzo-positivo", "examen-adaptado", "examen-dos-sesiones", "formatos-alternativos-evaluacion"],
   },
   {
     id: "parece-no-escuchar",
@@ -306,7 +345,8 @@ export const symptoms: Symptom[] = [
     label: "Dificultad para planificar trabajos largos y estudiar",
     description:
       "Deja para el último día proyectos, exposiciones o repaso de exámenes; no sabe trocear el contenido a estudiar.",
-    measureIds: ["fragmentacion-tareas", "agenda-tareas", "tutoria-individual", "autoinstrucciones", "entrenamiento-organizativo"],
+    // Se añade: calendario-entregas-flexible
+    measureIds: ["fragmentacion-tareas", "agenda-tareas", "tutoria-individual", "autoinstrucciones", "entrenamiento-organizativo", "calendario-entregas-flexible"],
   },
   {
     id: "rendimiento-irregular",
@@ -324,7 +364,8 @@ export const symptoms: Symptom[] = [
     label: "Se levanta del asiento o cambia de postura constantemente",
     description:
       "Pasea por el aula, se balancea o cambia de postura durante explicaciones y trabajo individual.",
-    measureIds: ["pausas-activas", "refuerzo-positivo", "objeto-manipulativo"],
+    // Se añade: espacio-descompresion
+    measureIds: ["pausas-activas", "refuerzo-positivo", "objeto-manipulativo", "espacio-descompresion"],
   },
   {
     id: "habla-exceso",
@@ -348,7 +389,8 @@ export const symptoms: Symptom[] = [
     label: "Inquietud interna y dificultad para estar tranquilo",
     description:
       "Refiere o muestra incomodidad en sesiones largas; común en adolescentes que ya controlan algo el movimiento pero mantienen agitación interna.",
-    measureIds: ["pausas-activas", "objeto-manipulativo", "tutoria-individual"],
+    // Se añade: espacio-descompresion
+    measureIds: ["pausas-activas", "objeto-manipulativo", "tutoria-individual", "espacio-descompresion"],
   },
   {
     id: "dificultad-tareas-tranquilas",
@@ -366,7 +408,8 @@ export const symptoms: Symptom[] = [
     label: "Interrumpe explicaciones o conversaciones de otros",
     description:
       "Se entromete en intervenciones de compañeros o docentes sin esperar el turno.",
-    measureIds: ["turnos-estructurados", "señales-no-verbales", "refuerzo-positivo"],
+    // Se añade: contrato-conductual-individual
+    measureIds: ["turnos-estructurados", "señales-no-verbales", "refuerzo-positivo", "contrato-conductual-individual"],
   },
   {
     id: "responde-antes",
@@ -382,7 +425,8 @@ export const symptoms: Symptom[] = [
     label: "Dificultad para esperar su turno",
     description:
       "Se frustra en dinámicas de grupo, debates o exposiciones cuando no le toca intervenir.",
-    measureIds: ["turnos-estructurados", "refuerzo-positivo"],
+    // Se añade: contrato-conductual-individual
+    measureIds: ["turnos-estructurados", "refuerzo-positivo", "contrato-conductual-individual"],
   },
   {
     id: "decisiones-rapidas",
@@ -390,7 +434,8 @@ export const symptoms: Symptom[] = [
     label: "Toma decisiones precipitadas sin valorar consecuencias",
     description:
       "Actúa sin pensar, lo que provoca conflictos con compañeros, expulsiones de aula o errores evitables en pruebas.",
-    measureIds: ["tiempo-respuesta", "rubrica-revision", "autoinstrucciones", "tutoria-individual"],
+    // Se añade: contrato-conductual-individual
+    measureIds: ["tiempo-respuesta", "rubrica-revision", "autoinstrucciones", "tutoria-individual", "contrato-conductual-individual"],
   },
   {
     id: "regulacion-emocional",
@@ -398,6 +443,7 @@ export const symptoms: Symptom[] = [
     label: "Reacciones emocionales desproporcionadas ante la frustración",
     description:
       "Ante una corrección, una nota baja o un conflicto reacciona con enfado, llanto o desconexión que altera la dinámica de aula.",
-    measureIds: ["tutoria-individual", "coordinacion-orientacion", "señales-no-verbales", "seguimiento-socioemocional"],
+    // Se añade: espacio-descompresion
+    measureIds: ["tutoria-individual", "coordinacion-orientacion", "señales-no-verbales", "seguimiento-socioemocional", "espacio-descompresion"],
   },
 ];

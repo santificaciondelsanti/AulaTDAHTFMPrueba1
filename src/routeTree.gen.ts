@@ -14,6 +14,7 @@ import { Route as ResultadosRouteImport } from './routes/resultados'
 import { Route as RecursosRouteImport } from './routes/recursos'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as AcercaRouteImport } from './routes/acerca'
+import { Route as MismedidasRouteImport } from './routes/Mis medidas'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TfmRoute = TfmRouteImport.update({
@@ -41,6 +42,11 @@ const AcercaRoute = AcercaRouteImport.update({
   path: '/acerca',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MismedidasRoute = MismedidasRouteImport.update({
+  id: '/Mis medidas',
+  path: '/Mis medidas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/Mis medidas': typeof MismedidasRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/Mis medidas': typeof MismedidasRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/Mis medidas': typeof MismedidasRoute
   '/acerca': typeof AcercaRoute
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
@@ -76,16 +85,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/Mis medidas'
     | '/acerca'
     | '/checklist'
     | '/recursos'
     | '/resultados'
     | '/tfm'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados' | '/tfm'
+  to:
+    | '/'
+    | '/Mis medidas'
+    | '/acerca'
+    | '/checklist'
+    | '/recursos'
+    | '/resultados'
+    | '/tfm'
   id:
     | '__root__'
     | '/'
+    | '/Mis medidas'
     | '/acerca'
     | '/checklist'
     | '/recursos'
@@ -95,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  MismedidasRoute: typeof MismedidasRoute
   AcercaRoute: typeof AcercaRoute
   ChecklistRoute: typeof ChecklistRoute
   RecursosRoute: typeof RecursosRoute
@@ -139,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AcercaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/Mis medidas': {
+      id: '/Mis medidas'
+      path: '/Mis medidas'
+      fullPath: '/Mis medidas'
+      preLoaderRoute: typeof MismedidasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -151,6 +177,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  MismedidasRoute: MismedidasRoute,
   AcercaRoute: AcercaRoute,
   ChecklistRoute: ChecklistRoute,
   RecursosRoute: RecursosRoute,
@@ -160,3 +187,12 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { createStart } from '@tanstack/react-start'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+  }
+}

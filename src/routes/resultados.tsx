@@ -362,8 +362,16 @@ function ResultadosPage() {
         </div>
       </section>
 
-      <Separator className="my-8" />
 
+           <p className="mb-4 text-sm text-muted-foreground">
+                  Las medidas son orientativas. Coordina su aplicación con el equipo de orientación
+          (Decreto 104/2018, Orden 20/2019) y con la familia. Registra los datos durante al
+          menos dos o tres semanas y revisa el plan con flexibilidad cuando los indicadores
+          muestren estancamiento.
+          </p>
+
+
+      <Separator className="my-8" />
       <section className="mb-10">
         <div className="mb-4 flex items-center justify-between gap-2">
           <h2 className="flex items-center gap-2 text-xl font-semibold">
@@ -408,15 +416,6 @@ function ResultadosPage() {
         </section>
       )}
 
-      <Alert className="mt-10 print:mt-6">
-        <AlertTitle>Recuerda</AlertTitle>
-        <AlertDescription>
-          Las medidas son orientativas. Coordina su aplicación con el equipo de orientación
-          (Decreto 104/2018, Orden 20/2019) y con la familia. Registra los datos durante al
-          menos dos o tres semanas y revisa el plan con flexibilidad cuando los indicadores
-          muestren estancamiento, sin esperar a la evaluación final del trimestre.
-        </AlertDescription>
-      </Alert>
     </main>
   );
 }
