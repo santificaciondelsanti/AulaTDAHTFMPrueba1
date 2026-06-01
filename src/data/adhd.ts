@@ -306,7 +306,7 @@ export const symptoms: Symptom[] = [
     label: "Dificultad para planificar trabajos largos y estudiar",
     description:
       "Deja para el último día proyectos, exposiciones o repaso de exámenes; no sabe trocear el contenido a estudiar.",
-    measureIds: ["fragmentacion-tareas", "agenda-tareas", "tutoria-individual", "autoinstrucciones"],
+    measureIds: ["fragmentacion-tareas", "agenda-tareas", "tutoria-individual", "autoinstrucciones", "entrenamiento-organizativo"],
   },
   {
     id: "rendimiento-irregular",
