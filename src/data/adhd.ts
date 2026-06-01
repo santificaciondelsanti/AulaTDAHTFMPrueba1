@@ -398,6 +398,6 @@ export const symptoms: Symptom[] = [
     label: "Reacciones emocionales desproporcionadas ante la frustración",
     description:
       "Ante una corrección, una nota baja o un conflicto reacciona con enfado, llanto o desconexión que altera la dinámica de aula.",
-    measureIds: ["tutoria-individual", "coordinacion-orientacion", "señales-no-verbales"],
+    measureIds: ["tutoria-individual", "coordinacion-orientacion", "señales-no-verbales", "seguimiento-socioemocional"],
   },
 ];
