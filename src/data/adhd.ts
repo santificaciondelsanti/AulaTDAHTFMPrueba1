@@ -212,6 +212,42 @@ export const measures: Record<string, Measure> = {
     evaluation:
       "Académico/conductual: análisis de 3 producciones por mes con rúbrica de 4 ítems (planificación, ejecución, revisión, autoevaluación) puntuados 0-2. Criterio de éxito: paso de una puntuación media ≤3/8 a ≥6/8 en un trimestre.\nSocioemocional: aumento de las verbalizaciones positivas del alumnado sobre su propio proceso (\"sé cómo empezar\", \"puedo revisarlo yo\").",
   },
+  "entrenamiento-organizativo": {
+    id: "entrenamiento-organizativo",
+    title: "Entrenamiento explícito en habilidades organizativas",
+    description:
+      "Trabajar de forma sistemática —en tutoría individual o en pequeños grupos— rutinas concretas de organización: preparación de la mochila la noche anterior con checklist, anotación de tareas con código de color por materia, planificación semanal con bloques de estudio, gestión del calendario de entregas y técnicas de troceado de contenido para exámenes. Las intervenciones que combinan modificaciones del entorno (asiento, agenda compartida) con entrenamiento explícito en habilidades organizativas muestran mejoras consistentes en la implicación académica y el control conductual del alumnado con TDAH. Complementa, no sustituye, a la agenda compartida y a la fragmentación de tareas.",
+    level: "individualizada",
+    evaluation:
+      "Conductual/ejecutivo: checklist semanal de 5-6 rutinas (mochila preparada, agenda al día, materiales en clase, planificación de la semana, repaso fraccionado, entregas en plazo) cumplimentado por el alumnado y validado por familia o tutor/a. Línea base de 2 semanas; seguimiento durante un trimestre. Criterio de éxito: ≥80 % de rutinas cumplidas durante 4 semanas consecutivas y reducción de olvidos de material registrados por el equipo docente.\nSocioemocional: percepción de autoeficacia organizativa (escala 1-5) al inicio y al final del trimestre.",
+  },
+  "examen-dos-sesiones": {
+    id: "examen-dos-sesiones",
+    title: "División del examen en dos sesiones",
+    description:
+      "Cuando el examen excede la capacidad de atención sostenida del alumnado, fraccionarlo en dos sesiones (mismo día con descanso o en días distintos) acordando previamente el reparto de bloques con el Departamento de Orientación. Mantiene los mismos criterios de evaluación y nivel de exigencia. Útil sobre todo en pruebas extensas de fin de unidad o de evaluación, donde el cansancio agrava los errores por descuido y la sintomatología ansiosa.",
+    level: "individualizada",
+    evaluation:
+      "Académico: comparar el % de apartados respondidos y los errores por descuido en 2 exámenes divididos frente a 2 en sesión única (o de cursos previos), aplicando la misma rúbrica. Criterio de éxito: aumento ≥20 % de apartados respondidos y reducción visible de errores por descuido sin merma del nivel de exigencia.\nSocioemocional: mini-encuesta al alumnado (escala 1-5) sobre fatiga, ansiedad y percepción de tiempo suficiente.",
+  },
+  "lectura-enunciado": {
+    id: "lectura-enunciado",
+    title: "Lectura y verificación del enunciado por el docente",
+    description:
+      "En pruebas escritas, el docente lee en voz alta el enunciado completo al inicio y, en pruebas largas, vuelve a recordar las indicaciones clave a la mitad. Comprobar individualmente que el alumnado ha comprendido la demanda antes de empezar (parafraseo breve). Reduce errores derivados de mala lectura, impulsividad lectora y dificultades de comprensión de instrucciones complejas.",
+    level: "individualizada",
+    evaluation:
+      "Académico: registro del número de preguntas falladas por mala interpretación del enunciado en 3 exámenes con esta medida frente a 3 sin ella. Criterio de éxito: reducción ≥50 % de errores atribuibles a comprensión del enunciado, sin aumentar el tiempo total empleado.",
+  },
+  "seguimiento-socioemocional": {
+    id: "seguimiento-socioemocional",
+    title: "Seguimiento socioemocional cooperativo familia-profesorado",
+    description:
+      "Establecer un registro compartido (ficha mensual o cuestionario breve) en el que tutor/a, profesorado de referencia y familia anoten cualitativamente la evolución en tres indicadores difíciles de medir de forma objetiva: autoconcepto académico, estabilidad de vínculos con iguales y capacidad de afrontar la frustración (errores, correcciones, notas bajas) sin abandono de tarea ni episodios desregulados. Su importancia crece en la adolescencia, donde la hiperactividad disminuye o se internaliza y persisten inatención, disfunción ejecutiva y dificultades emocionales.",
+    level: "individualizada",
+    evaluation:
+      "Socioemocional: ficha mensual con escala 1-5 en los tres indicadores (autoconcepto, vínculos, tolerancia a la frustración) cumplimentada por familia y tutor/a; comentario cualitativo breve. Triangular con autoinforme del alumnado en tutoría. Criterio de éxito: mejora sostenida ≥1 punto en al menos dos indicadores y ausencia de episodios disruptivos graves durante 6 semanas consecutivas.\nConductual/ejecutivo: registro de tareas abandonadas tras error o corrección; descenso ≥40 % respecto a la línea base.",
+  },
 };
 
 export const symptoms: Symptom[] = [
