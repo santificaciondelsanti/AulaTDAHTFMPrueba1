@@ -13,12 +13,9 @@ export function Header() {
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Brain className="h-5 w-5" />
           </span>
-          <span className="text-base font-semibold tracking-tight">TDAH</span>
+          <span className="text-base font-semibold tracking-tight"></span>
         </Link>
         <nav className="flex items-center gap-5">
-          <Link to="/" className={linkClass} activeProps={{ className: activeClass }} activeOptions={{ exact: true }}>
-            Inicio
-          </Link>
           <Link to="/checklist" className={linkClass} activeProps={{ className: activeClass }}>
             Evaluación
           </Link>
@@ -29,7 +26,7 @@ export function Header() {
             TFM
           </Link>
           <Link to="/Mis medidas" className={linkClass} activeProps={{ className: activeClass }}>
-            Mis medidas
+            Medidas
           </Link>
           <Link to="/acerca" className={linkClass} activeProps={{ className: activeClass }}>
             Acerca

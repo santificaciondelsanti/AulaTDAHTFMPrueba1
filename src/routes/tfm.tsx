@@ -76,7 +76,7 @@ function TfmPage() {
         </aside>
 
         {/* Contenido */}
-        <article className="space-y-10">
+        <article className="space-y-10 min-w-0 flex flex-wrap items-end justify-between">
           <Section id="resumen" title="1. Resumen">
             <p>
            El presente Trabajo de Fin de Máster analiza la respuesta educativa al alumnado de Educación Secundaria 
