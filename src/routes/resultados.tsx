@@ -200,6 +200,67 @@ function ResultadosPage() {
   const relatedFor = (measure: Measure) =>
     selectedSymptoms.filter((s) => s.measureIds.includes(measure.id));
 
+  const buildPlainTextReport = () => {
+    const lines: string[] = [];
+    lines.push("PLAN DE ACTUACIÓN — AulaTDAH");
+    lines.push(`Fecha: ${new Date().toLocaleDateString("es-ES")}`);
+    lines.push("");
+    lines.push("SÍNTOMAS IDENTIFICADOS");
+    (Object.keys(byCategory) as Category[]).forEach((cat) => {
+      if (byCategory[cat].length === 0) return;
+      lines.push(`\n${categoryLabels[cat].toUpperCase()}`);
+      byCategory[cat].forEach((s) => lines.push(`  - ${s.label}`));
+    });
+    lines.push("\nMEDIDAS UNIVERSALES (DUA)");
+    universal.forEach((m) => {
+      lines.push(`\n• ${m.title}`);
+      lines.push(`  ${m.description}`);
+      lines.push(`  Evaluación: ${m.evaluation.replace(/\n/g, " ")}`);
+    });
+    if (individualizadas.length > 0) {
+      lines.push("\nMEDIDAS INDIVIDUALIZADAS (PAP)");
+      individualizadas.forEach((m) => {
+        lines.push(`\n• ${m.title}`);
+        lines.push(`  ${m.description}`);
+        lines.push(`  Evaluación: ${m.evaluation.replace(/\n/g, " ")}`);
+      });
+    }
+    return lines.join("\n");
+  };
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      toast.success("Enlace copiado al portapapeles");
+    } catch {
+      toast.error("No se pudo copiar el enlace");
+    }
+  };
+
+  const handleEmail = () => {
+    const subject = encodeURIComponent("Plan de actuación TDAH — AulaTDAH");
+    const body = encodeURIComponent(
+      `Comparto el plan de actuación generado con AulaTDAH:\n\n${window.location.href}\n\n` +
+        `Resumen:\n${selectedSymptoms.length} síntomas · ${universal.length} medidas universales · ${individualizadas.length} individualizadas.`,
+    );
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+  };
+
+  const handleDownloadTxt = () => {
+    const blob = new Blob([buildPlainTextReport()], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `plan-actuacion-${new Date().toISOString().slice(0, 10)}.txt`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Registro descargado");
+  };
+
+  const handleSendOrientacion = () => {
+    toast.success("Solicitud enviada al Departamento de Orientación (simulado)");
+  };
+
   return (
     <main className="mx-auto max-w-4xl px-4 py-12 print:py-6">
       <header className="mb-8 flex flex-wrap items-start justify-between gap-4 print:mb-4">
@@ -214,11 +275,40 @@ function ResultadosPage() {
             {individualizadas.length} individualizada{individualizadas.length === 1 ? "" : "s"}
           </p>
         </div>
-        <div className="flex gap-2 print:hidden">
+        <div className="flex flex-wrap gap-2 print:hidden">
           <Button variant="outline" onClick={() => window.print()}>
             <Printer className="mr-2 h-4 w-4" />
             Imprimir / PDF
           </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button>
+                <Share2 className="mr-2 h-4 w-4" />
+                Compartir registro
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-64">
+              <DropdownMenuLabel>Opciones de compartir</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleCopyLink}>
+                <Link2 className="mr-2 h-4 w-4" />
+                Copiar enlace del plan
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleEmail}>
+                <Mail className="mr-2 h-4 w-4" />
+                Enviar por correo
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={handleDownloadTxt}>
+                <FileDown className="mr-2 h-4 w-4" />
+                Descargar registro (.txt)
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleSendOrientacion}>
+                <Send className="mr-2 h-4 w-4" />
+                Enviar a Orientación
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button asChild variant="ghost">
             <Link to="/checklist">
               <RotateCcw className="mr-2 h-4 w-4" />
@@ -227,6 +317,18 @@ function ResultadosPage() {
           </Button>
         </div>
       </header>
+
+      <Alert className="mb-6 print:hidden">
+        <Check className="h-4 w-4" />
+        <AlertTitle>Vista prototipo</AlertTitle>
+        <AlertDescription>
+          Las opciones de "Compartir registro" muestran cómo funcionará el envío al
+          equipo docente, a Orientación o a la familia. El envío real requerirá conectar
+          la herramienta con el correo del centro o con la plataforma educativa.
+        </AlertDescription>
+      </Alert>
+
+
 
       <section className="mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
