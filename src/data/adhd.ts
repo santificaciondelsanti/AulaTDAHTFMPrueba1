@@ -282,7 +282,7 @@ export const symptoms: Symptom[] = [
     label: "Comete errores por descuido en trabajos y exámenes",
     description:
       "Salta enunciados, confunde signos, copia mal datos o no revisa, pese a dominar el contenido.",
-    measureIds: ["rubrica-revision", "rubrica-competencial", "tiempo-tarea", "examen-adaptado"],
+    measureIds: ["rubrica-revision", "rubrica-competencial", "tiempo-tarea", "examen-adaptado", "lectura-enunciado"],
   },
   {
     id: "no-termina",
