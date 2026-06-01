@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TfmRouteImport } from './routes/tfm'
 import { Route as ResultadosRouteImport } from './routes/resultados'
 import { Route as RecursosRouteImport } from './routes/recursos'
 import { Route as ChecklistRouteImport } from './routes/checklist'
 import { Route as AcercaRouteImport } from './routes/acerca'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TfmRoute = TfmRouteImport.update({
+  id: '/tfm',
+  path: '/tfm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResultadosRoute = ResultadosRouteImport.update({
   id: '/resultados',
   path: '/resultados',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
+  '/tfm': typeof TfmRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
+  '/tfm': typeof TfmRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,27 @@ export interface FileRoutesById {
   '/checklist': typeof ChecklistRoute
   '/recursos': typeof RecursosRoute
   '/resultados': typeof ResultadosRoute
+  '/tfm': typeof TfmRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
+  fullPaths:
+    | '/'
+    | '/acerca'
+    | '/checklist'
+    | '/recursos'
+    | '/resultados'
+    | '/tfm'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
-  id: '__root__' | '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados'
+  to: '/' | '/acerca' | '/checklist' | '/recursos' | '/resultados' | '/tfm'
+  id:
+    | '__root__'
+    | '/'
+    | '/acerca'
+    | '/checklist'
+    | '/recursos'
+    | '/resultados'
+    | '/tfm'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +99,18 @@ export interface RootRouteChildren {
   ChecklistRoute: typeof ChecklistRoute
   RecursosRoute: typeof RecursosRoute
   ResultadosRoute: typeof ResultadosRoute
+  TfmRoute: typeof TfmRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tfm': {
+      id: '/tfm'
+      path: '/tfm'
+      fullPath: '/tfm'
+      preLoaderRoute: typeof TfmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/resultados': {
       id: '/resultados'
       path: '/resultados'
@@ -125,6 +155,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChecklistRoute: ChecklistRoute,
   RecursosRoute: RecursosRoute,
   ResultadosRoute: ResultadosRoute,
+  TfmRoute: TfmRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
