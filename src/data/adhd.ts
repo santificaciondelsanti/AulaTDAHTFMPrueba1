@@ -274,7 +274,7 @@ export const symptoms: Symptom[] = [
     label: "Olvida materiales, deberes o entregas con frecuencia",
     description:
       "Pierde apuntes, no trae el libro de la materia o no anota las tareas, lo que genera retrasos acumulativos en varias asignaturas.",
-    measureIds: ["agenda-tareas", "apoyo-visual", "tutoria-individual"],
+    measureIds: ["agenda-tareas", "apoyo-visual", "tutoria-individual", "entrenamiento-organizativo"],
   },
   {
     id: "errores-descuido",
